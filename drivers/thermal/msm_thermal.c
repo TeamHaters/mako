@@ -102,7 +102,7 @@ static void check_temp(struct work_struct *work)
 			limit_init = 1;
 	}
 
-	if (temp >= msm_thermal_info.limit_temp_degC) {
+	if (temp >= 80) {
 		if (limit_idx == limit_idx_low)
 			goto reschedule;
 
@@ -110,8 +110,7 @@ static void check_temp(struct work_struct *work)
 		if (limit_idx < limit_idx_low)
 			limit_idx = limit_idx_low;
 		max_freq = table[limit_idx].frequency;
-	} else if (temp < msm_thermal_info.limit_temp_degC -
-		 msm_thermal_info.temp_hysteresis_degC) {
+	} else if (temp < 80) {
 		if (limit_idx == limit_idx_high)
 			goto reschedule;
 
